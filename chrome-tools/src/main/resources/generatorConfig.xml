@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+    <context id="legends" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="com.google.plugin.MysqlPagePlugin"/>
+        <plugin type="com.google.plugin.LombokPlugin"/>
+        <commentGenerator type="com.google.plugin.swagger.SwaggerGenerator">
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/league_of_legends?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root"
+                        password="123456"/>
+
+        <javaModelGenerator targetPackage="com.google.chrome.tools.model.legends" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper.legends" targetProject="src/main/resources"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.google.chrome.tools.repository.legends"
+                             targetProject="src/main/java"/>
+        <table tableName="legends" domainObjectName="Legends"/>
+    </context>
+
+
+
+</generatorConfiguration>

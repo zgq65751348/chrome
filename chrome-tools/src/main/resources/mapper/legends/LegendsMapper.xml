@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.google.chrome.tools.repository.legends.LegendsMapper" >
+  <resultMap id="BaseResultMap" type="com.google.chrome.tools.model.legends.Legends" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="designation" property="designation" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="passive_skill" property="passiveSkill" jdbcType="VARCHAR" />
+    <result column="skill_Q" property="skillQ" jdbcType="VARCHAR" />
+    <result column="skill_W" property="skillW" jdbcType="VARCHAR" />
+    <result column="skill_E" property="skillE" jdbcType="VARCHAR" />
+    <result column="skill_R" property="skillR" jdbcType="VARCHAR" />
+    <result column="life_value" property="lifeValue" jdbcType="INTEGER" />
+    <result column="hurt" property="hurt" jdbcType="INTEGER" />
+    <result column="energy_type" property="energyType" jdbcType="TINYINT" />
+    <result column="energy_value" property="energyValue" jdbcType="INTEGER" />
+    <result column="armor" property="armor" jdbcType="INTEGER" />
+    <result column="magic_resistance" property="magicResistance" jdbcType="INTEGER" />
+    <result column="life_recovery" property="lifeRecovery" jdbcType="INTEGER" />
+    <result column="moving_speed" property="movingSpeed" jdbcType="INTEGER" />
+    <result column="point_coupon" property="pointCoupon" jdbcType="INTEGER" />
+    <result column="gold" property="gold" jdbcType="INTEGER" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, designation, name, passive_skill, skill_Q, skill_W, skill_E, skill_R, life_value, 
+    hurt, energy_type, energy_value, armor, magic_resistance, life_recovery, moving_speed, 
+    point_coupon, gold, avatar
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.google.chrome.tools.model.legends.LegendsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from legends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd > 0" >
+      limit #{limitStart,jdbcType=INTEGER}  , #{limitEnd,jdbcType=INTEGER}
+    </if>
+    <if test="groupByClause != null" >
+      group by ${groupByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.google.chrome.tools.model.legends.LegendsExample" >
+    delete from legends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.google.chrome.tools.model.legends.Legends" >
+    insert into legends (id, designation, name, 
+      passive_skill, skill_Q, skill_W, 
+      skill_E, skill_R, life_value, 
+      hurt, energy_type, energy_value, 
+      armor, magic_resistance, life_recovery, 
+      moving_speed, point_coupon, gold, 
+      avatar)
+    values (#{id,jdbcType=BIGINT}, #{designation,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{passiveSkill,jdbcType=VARCHAR}, #{skillQ,jdbcType=VARCHAR}, #{skillW,jdbcType=VARCHAR}, 
+      #{skillE,jdbcType=VARCHAR}, #{skillR,jdbcType=VARCHAR}, #{lifeValue,jdbcType=INTEGER}, 
+      #{hurt,jdbcType=INTEGER}, #{energyType,jdbcType=TINYINT}, #{energyValue,jdbcType=INTEGER}, 
+      #{armor,jdbcType=INTEGER}, #{magicResistance,jdbcType=INTEGER}, #{lifeRecovery,jdbcType=INTEGER}, 
+      #{movingSpeed,jdbcType=INTEGER}, #{pointCoupon,jdbcType=INTEGER}, #{gold,jdbcType=INTEGER}, 
+      #{avatar,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.google.chrome.tools.model.legends.Legends" >
+    insert into legends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="designation != null" >
+        designation,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="passiveSkill != null" >
+        passive_skill,
+      </if>
+      <if test="skillQ != null" >
+        skill_Q,
+      </if>
+      <if test="skillW != null" >
+        skill_W,
+      </if>
+      <if test="skillE != null" >
+        skill_E,
+      </if>
+      <if test="skillR != null" >
+        skill_R,
+      </if>
+      <if test="lifeValue != null" >
+        life_value,
+      </if>
+      <if test="hurt != null" >
+        hurt,
+      </if>
+      <if test="energyType != null" >
+        energy_type,
+      </if>
+      <if test="energyValue != null" >
+        energy_value,
+      </if>
+      <if test="armor != null" >
+        armor,
+      </if>
+      <if test="magicResistance != null" >
+        magic_resistance,
+      </if>
+      <if test="lifeRecovery != null" >
+        life_recovery,
+      </if>
+      <if test="movingSpeed != null" >
+        moving_speed,
+      </if>
+      <if test="pointCoupon != null" >
+        point_coupon,
+      </if>
+      <if test="gold != null" >
+        gold,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="designation != null" >
+        #{designation,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passiveSkill != null" >
+        #{passiveSkill,jdbcType=VARCHAR},
+      </if>
+      <if test="skillQ != null" >
+        #{skillQ,jdbcType=VARCHAR},
+      </if>
+      <if test="skillW != null" >
+        #{skillW,jdbcType=VARCHAR},
+      </if>
+      <if test="skillE != null" >
+        #{skillE,jdbcType=VARCHAR},
+      </if>
+      <if test="skillR != null" >
+        #{skillR,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeValue != null" >
+        #{lifeValue,jdbcType=INTEGER},
+      </if>
+      <if test="hurt != null" >
+        #{hurt,jdbcType=INTEGER},
+      </if>
+      <if test="energyType != null" >
+        #{energyType,jdbcType=TINYINT},
+      </if>
+      <if test="energyValue != null" >
+        #{energyValue,jdbcType=INTEGER},
+      </if>
+      <if test="armor != null" >
+        #{armor,jdbcType=INTEGER},
+      </if>
+      <if test="magicResistance != null" >
+        #{magicResistance,jdbcType=INTEGER},
+      </if>
+      <if test="lifeRecovery != null" >
+        #{lifeRecovery,jdbcType=INTEGER},
+      </if>
+      <if test="movingSpeed != null" >
+        #{movingSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="pointCoupon != null" >
+        #{pointCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="gold != null" >
+        #{gold,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.google.chrome.tools.model.legends.LegendsExample" resultType="java.lang.Integer" >
+    select count(*) from legends
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update legends
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.designation != null" >
+        designation = #{record.designation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passiveSkill != null" >
+        passive_skill = #{record.passiveSkill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillQ != null" >
+        skill_Q = #{record.skillQ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillW != null" >
+        skill_W = #{record.skillW,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillE != null" >
+        skill_E = #{record.skillE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillR != null" >
+        skill_R = #{record.skillR,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeValue != null" >
+        life_value = #{record.lifeValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.hurt != null" >
+        hurt = #{record.hurt,jdbcType=INTEGER},
+      </if>
+      <if test="record.energyType != null" >
+        energy_type = #{record.energyType,jdbcType=TINYINT},
+      </if>
+      <if test="record.energyValue != null" >
+        energy_value = #{record.energyValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.armor != null" >
+        armor = #{record.armor,jdbcType=INTEGER},
+      </if>
+      <if test="record.magicResistance != null" >
+        magic_resistance = #{record.magicResistance,jdbcType=INTEGER},
+      </if>
+      <if test="record.lifeRecovery != null" >
+        life_recovery = #{record.lifeRecovery,jdbcType=INTEGER},
+      </if>
+      <if test="record.movingSpeed != null" >
+        moving_speed = #{record.movingSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointCoupon != null" >
+        point_coupon = #{record.pointCoupon,jdbcType=INTEGER},
+      </if>
+      <if test="record.gold != null" >
+        gold = #{record.gold,jdbcType=INTEGER},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update legends
+    set id = #{record.id,jdbcType=BIGINT},
+      designation = #{record.designation,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      passive_skill = #{record.passiveSkill,jdbcType=VARCHAR},
+      skill_Q = #{record.skillQ,jdbcType=VARCHAR},
+      skill_W = #{record.skillW,jdbcType=VARCHAR},
+      skill_E = #{record.skillE,jdbcType=VARCHAR},
+      skill_R = #{record.skillR,jdbcType=VARCHAR},
+      life_value = #{record.lifeValue,jdbcType=INTEGER},
+      hurt = #{record.hurt,jdbcType=INTEGER},
+      energy_type = #{record.energyType,jdbcType=TINYINT},
+      energy_value = #{record.energyValue,jdbcType=INTEGER},
+      armor = #{record.armor,jdbcType=INTEGER},
+      magic_resistance = #{record.magicResistance,jdbcType=INTEGER},
+      life_recovery = #{record.lifeRecovery,jdbcType=INTEGER},
+      moving_speed = #{record.movingSpeed,jdbcType=INTEGER},
+      point_coupon = #{record.pointCoupon,jdbcType=INTEGER},
+      gold = #{record.gold,jdbcType=INTEGER},
+      avatar = #{record.avatar,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
