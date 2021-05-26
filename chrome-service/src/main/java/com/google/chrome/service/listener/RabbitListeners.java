@@ -2,6 +2,7 @@ package com.google.chrome.service.listener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.chrome.tools.constant.RabbitConstant;
+import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,5 +27,9 @@ public class RabbitListeners {
         String msg = new String(message.getBody(), "UTF-8");
         JSONObject jsonObject = JSONObject.parseObject(msg);
         log.info("====>来自死信队列的消息：<{}>",msg);
+    }
+
+    public void confirm(AMQP.Channel channel){
+
     }
 }

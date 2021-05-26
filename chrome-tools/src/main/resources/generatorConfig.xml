@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
 
-    <context id="legends" targetRuntime="MyBatis3">
+    <context id="mall" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <plugin type="com.google.plugin.MysqlPagePlugin"/>
         <plugin type="com.google.plugin.LombokPlugin"/>
@@ -17,15 +17,17 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/league_of_legends?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://localhost:3306/item?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="123456"/>
 
-        <javaModelGenerator targetPackage="com.google.chrome.tools.model.legends" targetProject="src/main/java"/>
-        <sqlMapGenerator targetPackage="mapper.legends" targetProject="src/main/resources"/>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.google.chrome.tools.repository.legends"
+        <javaModelGenerator targetPackage="com.google.chrome.tools.model.mall" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper.mall" targetProject="src/main/resources"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.google.chrome.tools.repository.mall"
                              targetProject="src/main/java"/>
-        <table tableName="legends" domainObjectName="Legends"/>
+        <table tableName="trade" domainObjectName="Trade"/>
+        <table tableName="processor" domainObjectName="Processor"/>
+        <!--<table tableName="broker_message_log" domainObjectName="BrokerMessageLog"/>-->
     </context>
 
 
